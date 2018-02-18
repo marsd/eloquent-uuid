@@ -3,7 +3,8 @@
     "description": "A Laravel Eloquent Model trait for using UUID's as primary keys",
     "type": "library",
     "require": {
-        "webpatser/laravel-uuid": "2.*"
+        "webpatser/laravel-uuid": "2.*",
+        "vend/mysql-uuid": "^1.0"
     },
     "require-dev": {
         "laravel/framework": "^5.1.0",
