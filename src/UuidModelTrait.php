@@ -2,7 +2,7 @@
 
 namespace Alsofronie\Uuid;
 
-use Webpatser\Uuid\Uuid;
+use Ramsey\Uuid\Uuid as RamseyUuid;
 use MysqlUuid\Formats\ReorderedString;
 use MysqlUuid\Uuid as MysqlUuid;
 
@@ -35,9 +35,8 @@ trait UuidModelTrait
                 // This is necessary because on \Illuminate\Database\Eloquent\Model::performInsert
                 // will not check for $this->getIncrementing() but directly for $this->incrementing
                 $model->incrementing = false;
-                // $uuidVersion = (!empty($model->uuidVersion) ? $model->uuidVersion : 4);   // defaults to 4
-                $uuid = Uuid::generate(1);
-                $reordered = new MysqlUuid($uuid->string);            
+                $uuid = RamseyUuid::uuid1()->toString();
+                $reordered = new MysqlUuid($uuid);            
                 
                 $model->attributes[$model->getKeyName()] = str_replace('-', '', $reordered->toFormat(new ReorderedString()));;
             }
